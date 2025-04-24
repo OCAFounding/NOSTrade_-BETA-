@@ -1,0 +1,35 @@
+services:
+  # Backend API Service
+  - type: web
+    name: nostrade-api
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+    healthCheckPath: /api/health
+    autoDeploy: true
+
+  # Frontend Dashboard
+  - type: web
+    name: nostrade-dashboard
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://nostrade-api.onrender.com
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    autoDeploy: true 

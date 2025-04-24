@@ -1,0 +1,56 @@
+{
+  "enabled_modules": ["repo1", "repo2", "repo3", "ensemble"],
+  "aggregation_method": "weighted_vote",
+  "confidence_threshold": 0.6,
+  "default_timeframe": "1h",
+  "default_symbol": "BTC",
+  "module_weights": {
+    "repo1": 0.25,
+    "repo2": 0.25,
+    "repo3": 0.25,
+    "ensemble": 0.25
+  },
+  "repo1": {
+    "fibonacci_levels": [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1],
+    "use_extension_levels": true,
+    "extension_levels": [1.618, 2.618, 3.618],
+    "min_swing_points": 5,
+    "trend_confirmation_periods": 14
+  },
+  "repo2": {
+    "fibonacci_levels": [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1],
+    "use_extension_levels": true,
+    "extension_levels": [1.618, 2.618, 3.618],
+    "min_swing_points": 5,
+    "trend_confirmation_periods": 14,
+    "rsi_period": 14,
+    "rsi_overbought": 70,
+    "rsi_oversold": 30
+  },
+  "repo3": {
+    "fibonacci_levels": [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1],
+    "use_extension_levels": true,
+    "extension_levels": [1.618, 2.618, 3.618],
+    "min_swing_points": 5,
+    "trend_confirmation_periods": 14,
+    "ml_model_path": "models/fibonacci_model.pkl",
+    "feature_window": 20,
+    "prediction_threshold": 0.7
+  },
+  "ensemble": {
+    "fibonacci_levels": [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1],
+    "use_extension_levels": true,
+    "extension_levels": [1.618, 2.618, 3.618],
+    "min_swing_points": 5,
+    "trend_confirmation_periods": 14,
+    "strategies": [
+      "harshgupta",
+      "brandon",
+      "ranjit",
+      "joengelh",
+      "faraway",
+      "nerr",
+      "doombringer"
+    ]
+  }
+} 
