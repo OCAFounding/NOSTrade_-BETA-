@@ -20,6 +20,7 @@ out
 # Version control
 .git
 .gitignore
+.github
 
 # IDE files
 .idea
@@ -67,6 +68,9 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Virtual Environment
 venv/
@@ -74,8 +78,8 @@ ENV/
 env/
 
 # Logs
-logs/
-*.log
+logs/*
+!logs/.gitkeep
 
 # Test outputs
 stress_test_output/
@@ -87,5 +91,17 @@ docker-compose.yml
 .dockerignore
 
 # Documentation
-README.md
-LICENSE 
+*.md
+!README.md
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Data
+data/*
+!data/.gitkeep 
