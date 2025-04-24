@@ -1,23 +1,29 @@
-# Use Node.js LTS version as base image
-FROM node:18-alpine
+# Use Python 3.9 slim image
+FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Install dependencies
-RUN npm ci
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy source code
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
 COPY . .
 
-# Build the application
-RUN npm run build
-
 # Expose port
-EXPOSE 3000
+EXPOSE 8000
 
 # Start the application
-CMD ["npm", "start"] 
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"] 

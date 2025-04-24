@@ -1,47 +1,31 @@
 version: '3.8'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  api:
+    build: .
     ports:
-      - "3000:3000"
+      - "8000:8000"
+    volumes:
+      - .:/app
     environment:
-      - NODE_ENV=production
-    depends_on:
-      - redis
-      - mongodb
+      - PORT=8000
+      - HOST=0.0.0.0
+      - LOG_LEVEL=INFO
+      - MONITORING_INTERVAL=300
+      - MAX_POSITION_SIZE=1000
+      - RISK_PER_TRADE=0.02
+      - MAX_DAILY_TRADES=10
+    env_file:
+      - .env
     restart: unless-stopped
-    networks:
-      - app-network
 
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
     volumes:
-      - redis-data:/data
+      - redis_data:/data
     command: redis-server --appendonly yes
-    networks:
-      - app-network
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb-data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
 
 volumes:
-  redis-data:
-  mongodb-data: 
+  redis_data: 
