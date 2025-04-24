@@ -1,172 +1,114 @@
 # NOS Trade (BETA)
 
-A sophisticated multi-agent trading system with advanced Fibonacci analysis, AI decision making, and comprehensive monitoring.
+NOS Trade is an advanced AI-powered trading ecosystem that combines multiple strategies, real-time market analysis, and automated decision-making capabilities.
 
 ## Features
 
-- **Multi-Agent Architecture**
-  - Parent AI for signal analysis and decision making
-  - Specialized agents for different trading strategies
-  - Inter-agent communication and coordination
+- **Multi-Agent System**: Coordinated AI agents for market analysis and trading decisions
+- **Fibonacci Analysis**: Advanced technical analysis using Fibonacci patterns
+- **Real-time Monitoring**: Comprehensive monitoring of trading activities and system health
+- **Compliance Framework**: Built-in compliance monitoring and risk management
+- **Stress Testing**: Robust testing framework for system validation
+- **API Integration**: RESTful API for external system integration
 
-- **Fibonacci Analysis**
-  - Multiple Fibonacci adapters for different market conditions
-  - Dynamic level calculation and signal generation
-  - Configurable retracement and extension levels
+## Project Structure
 
-- **Decision Making**
-  - AI-powered signal analysis
-  - Historical trend analysis
-  - Confidence-based decision making
-  - Risk management integration
-
-- **Monitoring & Compliance**
-  - Real-time system monitoring
-  - Performance metrics tracking
-  - Compliance checks and alerts
-  - Comprehensive logging
-
-- **Stress Testing**
-  - Multi-agent simulation
-  - Configurable test parameters
-  - Statistical analysis
-  - Visualization tools
-
-- **AI Chat Interface**
-  - Modern React-based UI
-  - Integration with Gemini Pro AI
-  - Real-time trading advice
-  - Fallback to mock responses
+```
+NOS-Trade/
+├── api/                    # FastAPI application
+│   ├── main.py            # Main application entry point
+│   ├── signals/           # Signal processing endpoints
+│   ├── strategy/          # Trading strategy endpoints
+│   ├── agent/             # AI agent endpoints
+│   ├── monitoring/        # System monitoring
+│   └── compliance/        # Compliance framework
+├── fibonacci_modules/     # Fibonacci analysis modules
+├── stress_test/          # Stress testing framework
+├── tests/                # Test suite
+└── docs/                 # Documentation
+```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- Python 3.8+
-- MongoDB
-- Redis
-- Docker (optional)
-- Gemini API key (for AI chat)
+- Python 3.9+
+- pip
+- virtualenv (recommended)
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/nostrade.git
-   cd nostrade
+   git clone https://github.com/OCAFounding/NOS-Trade.git
+   cd NOS-Trade
    ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment:
    ```bash
-   # Install Node.js dependencies
-   npm install
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-   # Install Python dependencies
+3. Install dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. Configure environment variables:
+### Running the Application
+
+1. Start the FastAPI server:
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   # Make sure to add your Gemini API key for AI chat functionality
+   cd api
+   uvicorn main:app --reload
    ```
 
-4. Start the services:
-   ```bash
-   # Using Docker
-   docker-compose up -d
+2. Access the API documentation at `http://localhost:8000/docs`
 
-   # Or manually on Windows
-   .\run_windows.bat
-   ```
+## Development
 
-### Usage
+### Branch Strategy
 
-1. Start the trading system:
-   ```bash
-   npm run start
-   ```
+- `main`: Production-ready code
+- `development`: Main development branch
+- Feature branches: `feature/feature-name`
+- Bug fixes: `fix/bug-name`
 
-2. Run stress tests:
-   ```bash
-   python -m stress_test.run_stress_test
-   ```
+### Testing
 
-3. Monitor the system:
-   ```bash
-   # Access the monitoring dashboard
-   http://localhost:3000/monitoring
-   ```
-
-4. Use the AI Chat interface:
-   ```bash
-   # Access the chat interface
-   http://localhost:3000
-   ```
-
-## Project Structure
-
-```
-nostrade/
-├── api/                    # API endpoints
-│   ├── compliance/        # Compliance monitoring
-│   ├── monitoring/        # System monitoring
-│   ├── ai_chat.py        # AI chat endpoint
-│   └── decision_client.py # Decision server client
-├── fibonacci_modules/     # Fibonacci analysis
-│   └── base_adapter.py   # Base Fibonacci adapter
-├── frontend/              # React frontend
-│   ├── src/              # Source code
-│   │   ├── components/   # React components
-│   │   └── ...
-│   └── ...
-├── stress_test/          # Stress testing module
-│   ├── multi_agent_simulator.py
-│   ├── visualization.py
-│   └── run_stress_test.py
-├── ai_agent_parent.py    # Parent AI implementation
-├── docker-compose.yml    # Docker configuration
-├── requirements.txt      # Python dependencies
-└── package.json         # Node.js dependencies
+Run the test suite:
+```bash
+pytest
 ```
 
-## Configuration
+### Stress Testing
 
-The system can be configured through environment variables in the `.env` file:
+Run the stress test framework:
+```bash
+python -m stress_test.run_stress_test
+```
 
-- `NODE_ENV`: Environment (development/production)
-- `PORT`: API server port
-- `MONGODB_URI`: MongoDB connection string
-- `REDIS_URL`: Redis connection URL
-- `JWT_SECRET`: JWT secret key
-- `LOG_LEVEL`: Logging level
-- `BINANCE_API_KEY`: Binance API key
-- `BINANCE_API_SECRET`: Binance API secret
-- `GEMINI_API_KEY`: Gemini API key for AI chat
-- `AZURE_OPENAI_API_KEY`: Azure OpenAI API key (optional)
-- `AZURE_OPENAI_ENDPOINT`: Azure OpenAI endpoint (optional)
-- `MAX_POSITION_SIZE`: Maximum position size
-- `RISK_PER_TRADE`: Risk per trade percentage
-- `MAX_DAILY_TRADES`: Maximum daily trades
-- `MONITORING_INTERVAL`: Monitoring update interval
-- `ALERT_THRESHOLD`: Alert threshold
-- `COMPLIANCE_CHECK_INTERVAL`: Compliance check interval
-- `MAX_DRAWDOWN`: Maximum allowed drawdown
+## Deployment
+
+The project is configured for deployment on Azure Web Apps. Configuration files include:
+
+- `web.config`: IIS configuration
+- `.deployment`: Azure deployment settings
+- `startup.sh`: Application startup script
+- `azure-pipelines.yml`: CI/CD pipeline configuration
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Disclaimer
+## Contact
 
-This software is in beta and should not be used for production trading without thorough testing and validation. Use at your own risk. 
+- GitHub: [@OCAFounding](https://github.com/OCAFounding) 
